@@ -1,0 +1,61 @@
+{% extends 'cloudinter/base.html' %}
+{% block content%}
+  <div class="card mb-3">
+        <div class="card-header">
+          <i class="fas fa-table"></i>
+          Approved Students</div>
+           <a href="{% url 'export_users_csv' %}">Export all users</a>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Address</th>
+                  <th>Age</th>
+                  <th>State</th>
+                  <th>Employment</th>
+                  <th>Parent Employment</th>
+                  <th>Computer Knowledge</th>
+                  <th>Date Interviewed</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                   <th>Name</th>
+                  <th>Address</th>
+                  <th>Age</th>
+                  <th>State</th>
+                  <th>Employment</th>
+                  <th>Parent Employment</th>
+                  <th>Computer Knowledge</th>
+                  <th>Date Interviewed</th>
+                </tr>
+              </tfoot>
+               <tbody>
+                {% for details in detail %}
+                    {% if details.approved_student %}
+                    <tr>
+                      <td>{{ details.fullname }} </td>
+                      <td>{{ details.address }}</td>
+                      <td>{{ details.age }}</td>
+                      <td>{{ details.state }}</td>
+                      <td>{{ details.employment_status }}</td>
+                      <td>{{ details.parent_employment }}</td>
+                      <td>{{ details.prog_knowledge }}</td>
+                      <td>{{ details.created_date }}</td>
+
+                      <td><a class="btn btn-default" href="#"><span class="glyphicon glyphicon-trash">Delete</span></a></td>
+                    </tr>    
+                    {% endif %}
+                    {% empty %}
+                        <p>None approved here yet :(</p>
+                  {% endfor %}
+                </tbody>
+            </table>
+          </div>
+        </div>
+       
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
+{% endblock %}

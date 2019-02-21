@@ -1,0 +1,125 @@
+<!-- templates/signup.html -->
+{% extends 'cloudinter/base.html' %}
+
+{% block title %}New Interview{% endblock %}
+
+{% block content %}
+{% comment %} <h2>New Interview</h2> {% endcomment %}
+<div class="container">
+  <form method="post" class="form-signin text-center border border-light p-5" role="form" enctype="multipart/form-data">
+        {% csrf_token %}
+    <div class="">
+        <p>
+            
+            <div class="form-row row">
+                {% comment %} {{ form.errors }} {% endcomment %}
+                <div class="col form-group col-sm-8">
+                    <!-- Username -->
+                     <label for="fullname" class='destro'>Full Name:</label>
+                    {{ form.fullname }}
+                </div>
+                <div class="col form-group col-sm-4">
+                    <!-- BVN -->
+                     <label for="age" class='destro'>Age:</label>
+                    {{ form.age }}  
+                </div>
+            </div>
+             <div class="form-row row">
+                <div class="col form-group col-sm-8">
+                    <!-- email -->
+                     <label for="email" class='destro'>Email:</label>
+                    {{ form.email }}
+                </div>
+                <div class="col form-group col-sm-4">
+                    <!-- Phone number -->
+                     <label for="phonenumber" class='destro'>Phone:</label>
+                    {{ form.phone_number }}  
+                </div>
+            </div>
+             <div class="form-row row">
+                <div class="col form-group col-sm-8">
+                    <!-- Address -->
+                     <label for="address" class='destro'>Address:</label>
+                    {{ form.address }}
+                </div>
+                <div class="col form-group col-sm-4">
+                    <!--  State -->
+                     <label for="state" class='destro'>State:</label>
+                    {{ form.state }}
+                </div>   
+            </div>
+            <div class="form-row row">
+                <div class="col form-group col-sm-12">
+                    <!-- Address -->
+                     <label for="school" class='desty'>Secondary School:</label>
+                    {{ form.school }}
+                </div>  
+            </div>
+             <div class="form-row row">
+                <div class="col form-group col-sm-12">
+                    <!-- Address --> 
+                    <label for="school" class='destro'>Tetiary Institute:</label>                    
+                    {{ form.university }}
+                </div>  
+            </div>
+             <div class="form-row row">
+                <div class="col form-group col-sm-5">
+                    <!-- University Course -->
+                    <label for="" class='dest'>Course Offered:</label>                    
+                    {{ form.course }}
+                </div> 
+                <div class="col form-group col-sm-4">
+                    <!-- University start date -->
+                    <label for="" class='dest'>Start Date:</label>                    
+                    {{ form.university_start }}
+                </div> 
+                <div class="col form-group col-sm-3">
+                    <!-- University end date -->
+                    <label for="" class='dest'>End Date:</label>                    
+                    {{ form.university_end }}
+                </div>  
+            </div>
+             <div class="form-row row">
+                <div class="col form-group col-sm-6">
+                    <!-- Student Employment -->
+                    <label for="" class='dest'>Student Employment: </label>
+                    {{ form.employment_status }}
+                </div>  
+                <div class="col form-group col-sm-6">
+                    <!-- parent employment -->
+                    <label for="" class='dest'>Parent Employment: </label>
+                    {{ form.parent_employment }}
+                </div> 
+            </div>
+            <label for="your_name">Computer Knowledge: </label>
+            <div class="form-row row">
+                <div class="col form-group col-sm-4">
+                    <!-- Address -->
+                    {{ form.program_knowledge }}
+                </div> 
+                <div class="col form-group col-sm-4">
+                    <!-- Address -->
+                    {{ form.database_knowledge }}
+                </div> 
+                <div class="col form-group col-sm-4">
+                    <!-- Address -->
+                    {{ form.operatingsystem_knowledge }}
+                </div>  
+            </div>
+                <div class="form-row row">
+                <div class="col form-group col-sm-12">
+                    <!-- Student Employment -->
+                    <label for="" class='destro'>Comment: </label>
+                    {{ form.note }}
+                </div>  
+            </div>
+              {% for error in forms.errors %}
+                   <p style="color: red">{{ error }}</p>
+              {% endfor %}
+        </p>
+          <button type="submit" class="btn btn-danger btn-block">Save</button>
+      </div>
+  </form>
+</div>
+    
+{% endblock %}

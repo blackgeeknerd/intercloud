@@ -1,0 +1,85 @@
+
+{% extends 'cloudinter/base.html' %}
+{% load static %}
+{% block content %}
+
+<div id="wrapper">
+
+  <div id="content-wrapper">
+
+    <div class="container-fluid">
+
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Interviewed</li>
+      </ol>
+
+
+      <!-- DataTables Example -->
+      <div class="card mb-3">
+        <div class="card-header">
+          <i class="fas fa-table"></i>
+          <a href="{% url 'export_users_csv' %}">Export</a></div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+              <thead>
+                <tr>
+                  <th>Name</th>
+                  <th>Number</th>
+                  <th>State</th>
+                  <th>Occupation</th>
+                  <th>Approved</th>
+                  <th>Note</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tfoot>
+                <tr>
+                  <th>Name</th>
+                  <th>Number</th>
+                  <th>State</th>
+                  <th>Occupation</th>
+                  <th>Approved</th>
+                  <th>Note</th>
+                  <th>Action</th>
+                </tr>
+              </tfoot>
+               <tbody>
+                  {% for c in details %}
+                    <tr>
+                      <td class='blue_font'>{{ c.fullname }}</td>
+                       <td>{{ c.phonenumber }}</td>
+                      <td>{{ c.state }}</td>
+                      <td>{{ c.employment_status }}</td>
+                      {% if c.approved_student %}
+                        <td class='green_font'>Approved</td>
+                      {% else %}
+                        <td class='red_font'>Not Yet</td>
+                      {% endif %}
+                      <td>{{ c.note }}</td>
+                      <td><a class="btn btn-danger btn-xs" href="{% url 'student_detail' pk=c.pk %}"><span class="glyphicon glyphicon-trash">Review</span></a></td>
+                    </tr>    
+                  {% endfor %}
+                </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated yesterday at 11:59 PM</div>
+      </div>
+
+    </div>
+    <!-- /.container-fluid -->
+
+   
+
+  </div>
+  <!-- /.content-wrapper -->
+
+</div>
+<!-- /#wrapper -->
+
+{% endblock %}

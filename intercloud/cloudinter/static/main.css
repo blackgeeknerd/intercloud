@@ -1,0 +1,188 @@
+h1, h3 {
+    color: red;
+}
+
+
+.btn:link, .btn:visited {
+    text-transform: uppercase;
+    /* color: black; */
+    text-decoration: none;
+    padding: 0.5rem 0.5rem;
+    display: inline-block;
+    border-radius: 10rem;
+    transition: all .2s;
+    position: relative;
+    font-size: 1.3rem; }
+  
+  .btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 1rem 2rem rgba(230, 28, 28, 0.671); }
+    .btn:hover::after {
+      transform: scaleX(1.4) scaleY(1.6);
+      opacity: 0; }
+  
+  .btn:active {
+    transform: translateY(-1px);
+    box-shadow: 0 0.5rem 1rem rgba(230, 28, 28, 0.271); }
+  
+  .btn--blue {
+    background-color: #ffffff;
+    color: #777; }
+    .btn--white::after {
+      background-color: #ffffff; }
+  
+  .btn::after {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    border-radius: 10rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    transition: all .4s; }
+
+.btn--animated {
+    animation: moveInBottom .8s ease-out .55s;
+    animation-fill-mode: backwards;
+}
+
+.btn--animated-8 {
+    animation: moveInBottom 1s ease-out .55s;
+    animation-fill-mode: backwards;
+}
+
+.btn--white {
+        background-color: purple;
+        color: #777; 
+}
+
+.btn--white::after {
+    background-color: red; 
+}
+
+.sidenav {
+    height: 535px;
+}
+
+/* .sidenav {
+    height: 100%;
+} */
+
+.marg-top-3re {
+    margin-top: 3rem;
+}
+
+.marg-top-5re {
+    margin-top: 5.5rem;
+}
+
+.marg-left-45{
+   margin-left: 38%;  
+   /* width: 10%;
+   padding-left: 10px; */
+}
+
+.small-images {
+    max-width: 13rem;
+    margin-top: 0.7rem;
+}
+
+.try{
+    background-image: url("./simbuddy/image/her.jpg");
+}
+
+.pad-left-3re{
+    padding-left: 3rem;
+}
+
+.small-image {
+    max-width: 5rem;
+    margin-top: 0.7rem;
+}
+
+.text-align-center{
+    text-align: center;
+}
+
+.test {
+    color: blue;
+}
+
+
+.xet {
+    text-align: center;
+    margin-top: 10%;
+    width: 40rem;
+    margin-left: 14.5rem;
+}
+
+.dem {
+    
+    margin-top: 7%;
+    height: 45%;
+}
+
+.white_font{
+    color: #ffffff;
+}
+
+input[type='text'] {
+    background: transparent;
+    border: none;
+    /* border-bottom: 1px solid #000000; */
+    border-bottom: 2px solid;
+	-webkit-box-shadow: none;
+	box-shadow: none;
+    border-radius: 0;
+    padding:2px 2px;
+}
+
+input[type="text"]:focus {
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  padding:2px 2px;
+  /* background-color: rgb(226, 15, 33); */
+  border-bottom: 2px solid red;
+}
+
+.red_font{
+    color: red;
+}
+
+
+.blue_font{
+    color:#007bff;
+}
+.green_font{
+    color: green;
+}
+
+.dest {
+    content: "*";
+    color: red;
+    margin-right: 68%;
+ }
+
+.destro {
+    content: "*";
+    color: red;
+    margin-right: 88%;
+ }
+
+.desty {
+    content: "*";
+    color: red;
+    margin-right: 85%;
+ }
+
+@keyframes moveInBottom {
+    0% {
+      /*start state of animation */
+      opacity: 0;
+      transform: translateY(10rem); }
+    100% {
+      /*end state of animation */
+      opacity: 1;
+      transform: translate(0); } }
