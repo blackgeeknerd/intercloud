@@ -3,13 +3,29 @@ from django.utils import timezone
 
 
 # Model that creates the Question table in the database.
+
+
+class Student(models.Model):
+    """
+    Model that holds user application
+    """
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    email = models.EmailField()
+    state = models.CharField(max_length=50)
+    phone = models.CharField(max_length=11)
+    created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email
+
+    def __repr__(self):
+        return self.phone
+
 class Question(models.Model):
-    fullname = models.CharField(max_length=200)
+    user = models.ForeignKey(Student, on_delete=models.CASCADE)
     age = models.CharField(max_length=200, null=True)
     address = models.TextField(null=True)
-    phonenumber = models.TextField(null=True)
-    email =  models.EmailField(null=True)
-    state = models.CharField(max_length=200, null=True)
     school = models.CharField(max_length=200)
     university = models.CharField(max_length=200, null=True)
     course = models.CharField(max_length=200, null=True)
