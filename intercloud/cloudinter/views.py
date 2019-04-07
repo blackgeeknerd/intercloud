@@ -3,35 +3,41 @@ import xlwt
 from django.http import HttpResponse
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
-from . models import *
-from .forms import *
+import cloudinter.models as cm
+import cloudinter.forms as cf
 
 # Create your views here.
 def index(request):
     return render(request, 'cloudinter/home.html')
 
 def student_list(request):
-    details = Question.objects.all().order_by('-created_date')
-    # details = Question.objects.filter(approved_student = True).order_by('-created_date')
+    """
+    this displays all student who applied on the site
+    """
+    query = cm.Student.objects.all()
+    context = {'details': query}
+    return render(request, 'cloudinter/student_list.html', context)
+
+def student_interview(request):
+    details = cm.Question.objects.all().order_by('-created_date')
     context = {'details' : details}
     return render(request, 'cloudinter/student_list.html', context)
 
 def student_approve(request):
-    detail = Question.objects.filter(approved_student = True).order_by('-created_date')
-    # detail = Question.objects.all()
+    detail = cm.Question.objects.filter(approved_student = True).order_by('-created_date')
     context = {'detail' : detail}
     return render(request, 'cloudinter/student_approved.html', context)
 
 #function to display the full details of a student
 def student_detail(request, pk):
-    info = get_object_or_404(Question, pk=pk)
+    info = get_object_or_404(cm.Question, pk=pk)
     # infos = Comment.objects.filter(post=info).order_by('-created_date')
     return render(request, 'cloudinter/student_detail.html', {'info' : info})
 
 
 def new_interview(request):
     if request.method == "POST":
-        form = QuestionForm(request.POST)
+        form = cf.QuestionForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             # post.author = request.user
@@ -40,26 +46,26 @@ def new_interview(request):
             post.save()
             return redirect('student_list')
     else:
-        form = QuestionForm()
+        form = cf.QuestionForm()
     return render(request, 'cloudinter/new_interview.html', {'form': form})
 
 #Function to add comment to a student question
 def add_comment_to_student(request, pk):
-    post = get_object_or_404(Question, pk=pk)
+    post = get_object_or_404(cm.Question, pk=pk)
     if request.method == "POST":
-        form = CommentForm(request.POST)
+        form = cf.CommentForm(request.POST)
         if form.is_valid():
             comment = form.save(commit=False)
             comment.post = post
             comment.save()
             return redirect('student_detail', pk=post.pk)
     else:
-        form = CommentForm()
+        form = cf.CommentForm()
     return render(request, 'cloudinter/add_comment_to_student.html', {'form': form})
 
 
 def inview(request):
-    detail = Question.objects.filter(approved_student = False).order_by('-created_date')
+    detail = cm.Question.objects.filter(approved_student = False).order_by('-created_date')
     # detail = Question.objects.all()
     context = {'detail' : detail}
     return render(request, 'cloudinter/student_inview.html', context)
@@ -72,7 +78,7 @@ def export_users_csv(request):
     writer = csv.writer(response)
     writer.writerow(['Full Name', 'Address', 'Interviewed date'])
 
-    users = Question.objects.all().order_by('-created_date').values_list('fullname', 'address', 'created_date')
+    users = cm.Question.objects.all().order_by('-created_date').values_list('fullname', 'address', 'created_date')
     for user in users:
         writer.writerow(user)
 
@@ -102,7 +108,7 @@ def export_users_xls(request):
     font_style = xlwt.XFStyle()
 
     # rows = User.objects.all().values_list('username', 'first_name', 'last_name', 'email')
-    rows = Question.objects.filter(approved_student = True).order_by('-created_date').values_list('fullname', 'address', 'created_date')
+    rows = cm.Question.objects.filter(approved_student = True).order_by('-created_date').values_list('fullname', 'address', 'created_date')
     for row in rows:
         row_num += 1
         for col_num in range(len(row)):
